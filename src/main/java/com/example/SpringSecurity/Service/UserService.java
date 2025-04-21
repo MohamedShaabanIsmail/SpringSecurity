@@ -41,12 +41,12 @@ public class UserService {
         return new HashMap<>();
     }
 
-    public Map<String, String> newAccessToken(String token){
-        String username = jwtService.extractUsername(token.substring(7));
-        Map<String,String> map = new HashMap<>();
-        map.put("access_token", jwtService.generateToken(username,1000*60*30));
-        map.put("refresh_token", token);
-        return map;
+    public Map<String, String> newAccessToken(String token) {
+        String username = jwtService.extractUsername(token);
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_token", jwtService.generateToken(username, 1000 * 60 * 30));
+        tokens.put("refresh_token", token);
+        return tokens;
     }
     
 }

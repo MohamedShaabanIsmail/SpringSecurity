@@ -34,9 +34,11 @@ public class UserController {
     
     @GetMapping("/refreshtoken")
     public Map<String, String> getNewToken(HttpServletRequest request) {
-        String token = request.getHeader("Athorization");
-        if(token != null)
-            System.out.println("token is null");
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+            throw new IllegalArgumentException("Invalid or missing Authorization header");
+        }
+        String token = authorizationHeader.substring(7);
         return userService.newAccessToken(token);
     }
     
