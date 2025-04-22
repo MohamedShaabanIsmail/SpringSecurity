@@ -9,6 +9,7 @@ public class Users {
     private int id;
     private String username;
     private String password;
+    private String role;
 
     public int getId() {
         return id;
@@ -28,5 +29,10 @@ public class Users {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    public void setRole(String role) {
+        this.role = role;
+    }
+    public String getRole() {
+        return role;
+    }
 }

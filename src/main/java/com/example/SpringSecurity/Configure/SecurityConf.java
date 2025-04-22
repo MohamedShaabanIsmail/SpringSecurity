@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,6 +21,7 @@ import com.example.SpringSecurity.Service.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConf {
 
     @Autowired
@@ -30,7 +32,7 @@ public class SecurityConf {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(customizer->customizer.disable()).
-        authorizeHttpRequests(request->request.requestMatchers("/login","/register").permitAll()
+        authorizeHttpRequests(request->request.requestMatchers("/login").permitAll()
         .anyRequest().authenticated()).
         httpBasic(Customizer.withDefaults()).
         sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
