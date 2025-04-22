@@ -1,5 +1,7 @@
 package com.example.SpringSecurity.Model;
 
+import com.example.SpringSecurity.Service.EncryptDecryptRole;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -30,7 +32,7 @@ public class Users {
         this.password = password;
     }
     public void setRole(String role) {
-        this.role = role;
+        this.role = EncryptDecryptRole.encrypt(role);
     }
     public String getRole() {
         return role;

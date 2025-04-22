@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.SpringSecurity.Service.EncryptDecryptRole;
+
 public class MyUserDetails implements UserDetails{
     private Users user;
 
@@ -16,7 +18,7 @@ public class MyUserDetails implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(user.getRole().toUpperCase()));
+        return Collections.singleton(new SimpleGrantedAuthority(EncryptDecryptRole.decrypt(user.getRole())));
     }
 
     @Override
